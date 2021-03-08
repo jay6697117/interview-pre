@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 1.0 parseFloat + toFixed 解决js浮点数计算精度问题
+      // const result = parseFloat((0.1 + 0.2).toFixed(3));
+      // console.log('result 001:>> ', result);
+
+      // 2.0 浅克隆
+      // const target = { a: 1, b: 2, c: 3 };
+      // function cloneObj(paramObj) {
+      //   let tempObj = {};
+      //   for (const key in paramObj) {
+      //     if (Object.hasOwnProperty.call(paramObj, key)) {
+      //       tempObj[key] = paramObj[key];
+      //     }
+      //   }
+      //   return tempObj;
+      // }
+      // const result = cloneObj(target);
+      // console.log('target :>> ', target);
+      // console.log('result :>> ', result);
+
+      // 3.0 深克隆
+      // 3.1 递归拷贝 01
+      // function Foo(p1, p2, p3) {
+      //   this.a = p1;
+      //   this.b = p2;
+      //   this.c = p3;
+      // }
+      // const target = new Foo(1, 2, 3);
+      // function deepClone(paramObj) {
+      //   let result;
+      //   if (typeof paramObj === 'object') {
+      //     result = paramObj.constructor === 'Array' ? [] : {};
+      //     for (const key in paramObj) {
+      //       if (Object.hasOwnProperty.call(paramObj, key)) {
+      //         result[key] = typeof paramObj[key] === 'object' ? deepClone(paramObj[key]) : paramObj[key];
+      //       }
+      //     }
+      //   } else {
+      //     result = paramObj;
+      //   }
+      //   return result;
+      // }
+      // const result = deepClone(target);
+      // result.a = 11;
+      // result.b = 22;
+      // result.c = 33;
+      // console.log('target :>> ', target);
+      // console.log('result :>> ', result);
+
+      // 3.2 递归拷贝 02
+      // function Foo(p1, p2, p3) {
+      //   this.a = p1;
+      //   this.b = p2;
+      //   this.c = p3;
+      // }
+
+      // const target = new Foo(1, 2, 3);
+      // const result = deepClone(target);
+      // result.a = 11;
+      // result.b = 22;
+      // result.c = 33;
+      // console.log('target :>> ', target);
+      // console.log('result :>> ', result);
+
+      // //使用递归的方式实现数组、对象的深拷贝
+      // function deepClone(obj) {
+      //   //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
+      //   let objClone = Array.isArray(obj) ? [] : {};
+      //   //进行深拷贝的目标对象不能为空，并且是数组或者是对象
+      //   if (obj && typeof obj === 'object') {
+      //     for (const key in obj) {
+      //       if (Object.hasOwnProperty.call(obj, key)) {
+      //         if (obj[key] && typeof obj[key] === 'object') {
+      //           //数组或者对象
+      //           objClone[key] = deepClone(obj[key]);
+      //         } else {
+      //           //基础数据类型
+      //           objClone[key] = obj[key];
+      //         }
+      //       }
+      //     }
+      //   }
+      //   return objClone;
+      // }
+
+      // 3.3 Object.assign实现深拷贝 03
+      // const source = new Foo(1, 2, 3);
+      // let target = {};
+      // Object.assign(target, source);
+
+      // target.a = 11;
+      // target.b = 22;
+      // target.c = 33;
+      // console.log('target :>> ', target);
+      // console.log('source :>> ', source);
+
+      // function Foo(p1, p2, p3) {
+      //   this.a = p1;
+      //   this.b = p2;
+      //   this.c = p3;
+      // }
+
+      // 3.4 JSON对象/...延展操作符 实现深拷贝 04
+      // const target = new Foo(1, 2, 3);
+      // // const result = JSON.parse(JSON.stringify(target))
+      // const result = { ...target };
+
+      // result.a = 11;
+      // result.b = 22;
+      // result.c = 33;
+      // console.log('target :>> ', target);
+      // console.log('result :>> ', result);
+
+      // function Foo(p1, p2, p3) {
+      //   this.a = p1;
+      //   this.b = p2;
+      //   this.c = p3;
+      // }
+
+
+    </script>
+  </body>
+</html>

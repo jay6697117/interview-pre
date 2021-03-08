@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.0
+      // function Foo(name, weight) {
+      //   this.name = name;
+      //   this.weight = weight;
+      //   this.showName = function () {
+      //     alert(`你好, ${this.name}`);
+      //   };
+      //   // return '111'; //基础数据类型，返回 new 创建的新对象实例
+      //   // return 1; //基础数据类型，返回 new 创建的新对象实例
+      //   // return true; //基础数据类型，返回 new 创建的新对象实例
+      //   // return undefined; //基础数据类型，返回 new 创建的新对象实例
+      //   // return null; //基础数据类型，返回 new 创建的新对象实例
+      //   // return {}; //如果函数返回一个对象，那么new 这个函数调用返回这个函数的返回对象
+      //   // return []; //如果函数返回一个对象，那么new 这个函数调用返回这个函数的返回对象
+      //   // return () => {}; //如果函数返回一个对象，那么new 这个函数调用返回这个函数的返回对象
+      // }
+      // const f1 = new Foo('zjh', '200');
+      // console.log('f1 :>> ', f1);
+
+      // 2.0
+      // let obj = {};
+      // obj[Symbol('a')] = 'local symbol a'; // 局部 symbol a
+      // obj[Symbol.for('b')] = 'global symbol b'; // 全局 symbol b
+
+      // console.log('obj :>> ', obj);
+      // console.log('Object.getOwnPropertySymbols(obj) :>> ', Object.getOwnPropertySymbols(obj));
+
+      // for (const iterator of Object.getOwnPropertySymbols(obj)) {
+      //   console.log('iterator :>> ', iterator);
+      // }
+
+      //3.0
+
+      // demo01
+      function foo() {
+        var a = 20;
+        var b = 30;
+
+        function bar() {
+          return a + b;
+        }
+
+        return bar;
+      }
+
+      console.log('foo :>> ', foo);
+      var bar = foo();
+      console.log('bar :>> ', bar);
+      var res = bar();
+      console.log('res :>> ', res);
+
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+
+    }
+    </script>
+  </body>
+</html>
