@@ -58,5 +58,5 @@ function _interopRequireWildcard(obj) {
   return newObj;
 }
 
-console.log('obj1 :>> ', _demo.obj1);
-console.log('obj2 :>> ', _demo['default']);
+// console.log('obj1 :>> ', _demo.obj1);
+// console.log('obj2 :>> ', _demo['default']);
