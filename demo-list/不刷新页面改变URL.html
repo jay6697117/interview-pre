@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>在不刷新页面的情况下改变URL</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>在不刷新页面的情况下改变URL:</h1>
+    </div>
+    <script>
+      // 4.0 在不刷新页面的情况下改变URL
+      new Promise(resolve => {
+        setTimeout(() => {
+          setBrowserUrl({ name: 'zjh', age: 33, sex: 'man', height: '177 cm' });
+          console.log('location.search :>> ', location.search);
+          return resolve(location.search);
+        }, 2000);
+      })
+        .then(queryString => {
+          console.log('queryString :>> ', queryString);
+
+          const result = getParams(queryString);
+          console.log('result :>> ', result);
+
+          for (const key in result) {
+            if (Object.hasOwnProperty.call(result, key)) {
+              const h1 = document.createElement('h1');
+              h1.innerHTML = `${key} : ${result[key]}`;
+              document.getElementById('app').appendChild(h1);
+            }
+          }
+        })
+        .catch(err => alert(err));
+
+      /**
+       * 设置浏览器url
+       *  params：queryObj（参数对象）
+       */
+      function setBrowserUrl(queryObj) {
+        // stringify是queryString的一个api，具体可以查看node官网，也可以自己实现
+        let url = `${location.pathname}?${parseParams(queryObj)}`;
+        history.pushState({ url: url }, '', url);
+        // history.replaceState({ url: url }, '', url);
+      }
+
+      function parseParams(data) {
+        try {
+          let tempArr = [];
+          for (const i in data) {
+            let key = encodeURIComponent(i);
+            let value = encodeURIComponent(data[i]);
+            tempArr.push(key + '=' + value);
+          }
+          let urlParamsStr = tempArr.join('&');
+          return urlParamsStr;
+        } catch (err) {
+          alert(err);
+          return '';
+        }
+      }
+
+      function getParams(url) {
+        try {
+          let index = url.indexOf('?');
+          url = url.match(/\?([^#]+)/)[1];
+          let obj = {},
+            arr = url.split('&');
+          for (let i = 0; i < arr.length; i++) {
+            let subArr = arr[i].split('=');
+            let key = decodeURIComponent(subArr[0]);
+            let value = decodeURIComponent(subArr[1]);
+            obj[key] = value;
+          }
+          return obj;
+        } catch (err) {
+          return null;
+        }
+      }
+    </script>
+  </body>
+</html>

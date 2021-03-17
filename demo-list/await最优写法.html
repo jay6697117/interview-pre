@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>await最优写法</title>
+  </head>
+  <body>
+    <script>
+      //执行函数
+      runFn();
+
+      function promiseFn() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            return resolve('成功了');
+            return reject(new Error('失败了'));
+            // throw new Error('throw error 失败了');
+          }, 2000);
+        });
+      }
+
+      async function runFn() {
+        const promise = promiseFn();
+        console.log('promise :>> ', promise);
+
+        // 1.0 promise 链式
+        promise
+          .then(res => {
+            console.log('res1 :>> ', res);
+          })
+          .catch(err => {
+            console.log('err1 :>> ', err);
+          });
+
+        // 2.0 try/catch + await
+        try {
+          const res = await promise;
+          console.log('res2 :>> ', res);
+        } catch (err) {
+          console.log('err2 :>> ', err);
+        }
+
+        // 3.0 await + catch
+        const res = await promise.catch(err => console.log('err3 :>> ', err));
+        if (res) {
+          console.log('res3 :>> ', res);
+        }
+      }
+    </script>
+  </body>
+</html>
