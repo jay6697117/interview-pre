@@ -10,18 +10,18 @@
     <script>
       // 可以解决if...else if...简单的问题
       const rules = {
-        isAnswer1() {
-          return code;
+        isAnswer1(key) {
+          return key;
         },
-        isAnswer2() {
-          return code;
+        isAnswer2(key) {
+          return key;
         },
-        isAnswer3() {
-          return code;
+        isAnswer3(key) {
+          return key;
         }
       };
 
-      function determineAction(type) {
+      function determineAction(isAnswer) {
         if (isAnswer === 1) {
           return 'isAnswer1';
         } else if (isAnswer === 2) {
@@ -31,10 +31,18 @@
         }
       }
 
-      function init() {
+      function init(isAnswer) {
         let key = determineAction(isAnswer);
-        return rules[key];
+        console.log('rules[key] :>> ', rules[key]);
+        return rules[key](isAnswer);
       }
+
+      const result1 = init(1);
+      const result2 = init(2);
+      const result3 = init(3);
+      console.log('result1 :>> ', result1);
+      console.log('result2 :>> ', result2);
+      console.log('result3 :>> ', result3);
     </script>
   </body>
 </html>
