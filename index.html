@@ -8,6 +8,33 @@
   </head>
   <body>
     <script>
+      // 可以解决if...else if...简单的问题
+      const rules = {
+        isAnswer1() {
+          return code;
+        },
+        isAnswer2() {
+          return code;
+        },
+        isAnswer3() {
+          return code;
+        }
+      };
+
+      function determineAction(type) {
+        if (isAnswer === 1) {
+          return 'isAnswer1';
+        } else if (isAnswer === 2) {
+          return 'isAnswer2';
+        } else if (isAnswer === 3) {
+          return 'isAnswer3';
+        }
+      }
+
+      function init() {
+        let key = determineAction(isAnswer);
+        return rules[key];
+      }
     </script>
   </body>
 </html>
