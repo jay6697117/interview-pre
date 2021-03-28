@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>发送了http请求</h1>
+    <div id="app"></div>
+    <script>
+      /**
+       * 判断传入的值类型是不是对象
+       * @param {*} value 传入的值
+       * @returns 返回布尔值
+       */
+      function isObject(value) {
+        return Object.prototype.toString.call(value) === '[object Object]';
+      }
+
+      function serialize(params) {
+        let result = '';
+        if (isObject(params)) {
+          Object.keys(params).forEach(key => {
+            let val = encodeURIComponent(params[key]);
+            result += `${key}=${val}&`;
+          });
+        }
+        return result.substr(0, result.length - 1);
+      }
+
+      // console.log('serialize({a:1,b:2}) :>> ', serialize({ a: 1, b: 2 }));
+
+      const defaultHeaders = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      };
+
+      // ajax简单封装
+      function request(options) {
+        return new Promise((resolve, reject) => {
+          const { method, url, params, headers } = options;
+          const xhr = new XMLHttpRequest();
+          if (method === 'GET' || method === 'DELETE') {
+            // GET和DELETE一般用querystring传参
+            const requestURL = url + '?' + serialize(params);
+            xhr.open(method, requestURL, true);
+          } else {
+            xhr.open(method, url, true);
+          }
+          // 设置请求头
+          const mergedHeaders = Object.assign({}, defaultHeaders, headers);
+          Object.keys(mergedHeaders).forEach(key => {
+            xhr.setRequestHeader(key, mergedHeaders[key]);
+          });
+          // 状态监听
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                resolve(xhr.response);
+              } else {
+                reject(xhr.status);
+              }
+            }
+          };
+          xhr.onerror = function (e) {
+            reject(e);
+          };
+          // 处理body数据，发送请求
+          const data = method === 'POST' || method === 'PUT' ? serialize(params) : null;
+          xhr.send(data);
+        });
+      }
+
+      const options = {
+        method: 'GET',
+        // url: '/user/page',
+        url: 'https://api.github.com/users/jay6697117',
+        params: {
+          pageNo: 1,
+          pageSize: 10
+        }
+      };
+
+      // 通过Promise的形式调用接口
+      request(options).then(
+        res => {
+          // 请求成功
+          console.log('res :>> ', res);
+          const img = document.createElement('img');
+          img.src = JSON.parse(res).avatar_url;
+          document.getElementById('app').append(img);
+        },
+        err => {
+          // 请求失败
+          console.log('err :>> ', err);
+        }
+      );
+    </script>
+  </body>
+</html>
