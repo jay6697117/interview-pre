@@ -12,7 +12,7 @@
     <div id="app"></div>
     <script>
       /**
-       * 判断传入的值类型是不是对象
+       * 判断是不是对象
        * @param {*} value 传入的值
        * @returns 返回布尔值
        */
@@ -20,6 +20,11 @@
         return Object.prototype.toString.call(value) === '[object Object]';
       }
 
+      /**
+       * 序列化参数
+       * @param {*} value 传入的对象
+       * @returns 返回字符串
+       */
       function serialize(params) {
         let result = '';
         if (isObject(params)) {
@@ -28,6 +33,7 @@
             result += `${key}=${val}&`;
           });
         }
+        // return result;
         return result.substr(0, result.length - 1);
       }
 
@@ -40,7 +46,7 @@
       // ajax简单封装
       function request(options) {
         return new Promise((resolve, reject) => {
-          const { method, url, params, headers } = options;
+          const { method, url, params, headers } = options; //解构赋值参数
           const xhr = new XMLHttpRequest();
           if (method === 'GET' || method === 'DELETE') {
             // GET和DELETE一般用querystring传参
@@ -57,18 +63,23 @@
           // 状态监听
           xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
+              // 请求结束，处理服务器返回的数据
               if (xhr.status === 200) {
-                resolve(xhr.response);
+                return resolve(xhr.response);
               } else {
-                reject(xhr.status);
+                return reject(xhr.status);
               }
+            } else {
+              // 显示提示“加载中……”
             }
           };
+
           xhr.onerror = function (e) {
             reject(e);
           };
           // 处理body数据，发送请求
           const data = method === 'POST' || method === 'PUT' ? serialize(params) : null;
+          xhr.responseType = 'json';
           xhr.send(data);
         });
       }
@@ -88,8 +99,9 @@
         res => {
           // 请求成功
           console.log('res :>> ', res);
+          console.log('typeof res :>> ', typeof res);
           const img = document.createElement('img');
-          img.src = JSON.parse(res).avatar_url;
+          img.src = res.avatar_url;
           document.getElementById('app').append(img);
         },
         err => {
