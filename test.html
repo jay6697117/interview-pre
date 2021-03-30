@@ -6,123 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-
   <body>
-    <h1>发送了http请求</h1>
-    <div id="app"></div>
     <script>
-      /**
-       * 判断是不是对象
-       * @param {*} value 传入的值
-       * @returns 返回布尔值
-       */
-      function isObject(value) {
-        return Object.prototype.toString.call(value) === '[object Object]';
-      }
+      // 1.0 宏任务+微任务 案例
+      // var a = 1;
+      // console.log('a:', a); //1 同步
+      // var b = 2;
+      // console.log('b:', b); //2 同步
+      // setTimeout(function task1() {
+      //   console.log('task1:', 5); //5 同步宏任务
+      //   Promise.resolve(6).then(function microtask2(res) {
+      //     console.log('microtask2:', res); //6 微任务
+      //   });
+      // }, 0); //宏任务
 
-      /**
-       * 序列化参数
-       * @param {*} value 传入的对象
-       * @returns 返回字符串
-       */
-      function serialize(params) {
-        let result = '';
-        if (isObject(params)) {
-          Object.keys(params).forEach(key => {
-            let val = encodeURIComponent(params[key]);
-            result += `${key}=${val}&`;
-          });
-        }
-        // return result;
-        return result.substr(0, result.length - 1);
-      }
+      // Promise.resolve(4).then(function microtask1(res) {
+      //   console.log('microtask1:', res); //4 微任务
+      // });
+      // var c = 3;
+      // console.log('c:', c); // 3 同步
 
-      // console.log('serialize({a:1,b:2}) :>> ', serialize({ a: 1, b: 2 }));
+      // 2.0 宏任务+微任务 Event Loop
+      // var promise1 = new Promise((resolve, reject) => {
+      //   console.log('setTimeout 注册了 ～～ Event Loop第一轮执行'); // Event Loop第一轮
+      //   setTimeout(() => {
+      //     // Event Loop第一轮注册宏任务setTimeout
+      //     console.log('setTimeout 执行了 ～～ Event Loop第二轮执行'); // Event Loop第二轮
+      //     resolve(1); // Event Loop第二轮
+      //   }, 1000);
+      // });
+      // promise1.then(res => {
+      //   // Event Loop第一轮通过.then注册微任务
+      //   console.log('promise1微任务被执行了 ～～ Event Loop第二轮执行'); // Event Loop第二轮
+      // });
 
-      const defaultHeaders = {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      };
+      // 3.0 基操勿6
+      // const mutationCallback = function (mutationRecords, observer) {
+      //   console.log('mt1');
+      // };
 
-      // ajax简单封装
-      function request(options) {
-        return new Promise((resolve, reject) => {
-          const { method, url, params, headers } = options; //解构赋值参数
-          const xhr = new XMLHttpRequest();
-          if (method === 'GET' || method === 'DELETE') {
-            // GET和DELETE一般用querystring传参
-            const requestURL = url + '?' + serialize(params);
-            xhr.open(method, requestURL, true);
-          } else {
-            xhr.open(method, url, true);
-          }
-          // 设置请求头
-          const mergedHeaders = Object.assign({}, defaultHeaders, headers);
-          Object.keys(mergedHeaders).forEach(key => {
-            xhr.setRequestHeader(key, mergedHeaders[key]);
-          });
-          // 状态监听
-          xhr.onreadystatechange = function () {
-            // XMLHttpRequest.readyState返回一个整数，表示实例对象的当前状态。该属性只读。它可能返回以下值。
-            // 0，表示 XMLHttpRequest 实例已经生成，但是实例的open()方法还没有被调用。
-            // 1，表示open()方法已经调用，但是实例的send()方法还没有调用，仍然可以使用实例的setRequestHeader()方法，设定 HTTP 请求的头信息。
-            // 2，表示实例的send()方法已经调用，并且服务器返回的头信息和状态码已经收到。
-            // 3，表示正在接收服务器传来的数据体（body 部分）。这时，如果实例的responseType属性等于text或者空字符串，responseText属性就会包含已经收到的部分信息。
-            // 4，表示服务器返回的数据已经完全接收，或者本次接收已经失败。
-            if (xhr.readyState === 4) {
-              // 请求结束，处理服务器返回的数据
-              if (xhr.status === 200) {
-                return resolve(xhr.response);
-              } else {
-                return reject(xhr.status);
-              }
-            } else {
-              // 显示提示“加载中……”
-            }
-          };
+      // const config = { attributes: true };
+      // const observer = new MutationObserver(mutationCallback);//MutationObserver也是微任务
+      // observer.observe(document.body, config);
 
-          xhr.onerror = function (e) {
-            return reject(e);
-          };
-          // 处理body数据，发送请求
-          const data = method === 'POST' || method === 'PUT' || method === 'PATCH' ? serialize(params) : null;
-          xhr.responseType = 'json';
-          xhr.send(data);
-        });
-      }
+      // Promise.resolve()
+      //   .then(() => {
+      //     console.log('mt2');
+      //     setTimeout(() => {
+      //       console.log('t1');
+      //     }, 2000);
+      //     document.body.setAttribute('test', 'hello world');//触发微任务
+      //   })
+      //   .then(() => {
+      //     console.log('mt3');
+      //   });
 
-      const options = {
-        method: 'GET',
-        // url: '/user/page',
-        url: 'https://api.github.com/users/jay6697117',
-        params: {
-          pageNo: 1,
-          pageSize: 10
-        }
-      };
+      // setTimeout(() => {
+      //   console.log('t2');
+      // }, 2000);
 
-      // 通过Promise的形式调用接口
-      request(options)
-        .then(
-          res => {
-            // 请求成功
-            console.log('res :>> ', res);
-            console.log('typeof res :>> ', typeof res);
-            const img = document.createElement('img');
-            img.src = res.avatar_url;
-            document.getElementById('app').append(img);
-          }
-          // err => {
-          //   // 请求失败
-          //   console.log('err :>> ', err);
-          // }
-        )
-        .catch(err => {
-          // 请求失败
-          console.log('err :>> ', err);
+      // 4.0 浏览器不讲武德
+      Promise.resolve()
+        .then(() => {
+          console.log(0);
+          return Promise.resolve(4);
         })
-        .finally(() => {
-          // 结束loading
-          console.log('Promise finally一定执行');
+        .then(res => {
+          console.log(res);
+        });
+
+      Promise.resolve()
+        .then(() => {
+          console.log(1);
+        })
+        .then(() => {
+          console.log(2);
+        })
+        .then(() => {
+          console.log(3);
+        })
+        .then(() => {
+          console.log(5);
+        })
+        .then(() => {
+          console.log(6);
         });
     </script>
   </body>
