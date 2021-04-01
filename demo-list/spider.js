@@ -3,17 +3,10 @@ const path = require('path');
 const https = require('https');
 const puppeteer = require('puppeteer');
 
-const sleep = delay => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      try {
-        resolve(1);
-      } catch (e) {
-        reject(0);
-      }
-    }, delay);
-  });
-};
+function sleep(delay) {
+  return new Promise(resolve => setTimeout(resolve, delay));
+}
+
 async function getWelfareImage(url) {
   // 返回解析为Promise的浏览器
   const browser = await puppeteer.launch();
@@ -24,7 +17,7 @@ async function getWelfareImage(url) {
     waitUntil: 'networkidle2'
   });
   // 等待3000ms，等待浏览器的加载
-  await sleep(5000);
+  await sleep(3000);
   // 可以在page.evaluate的回调函数中访问浏览器对象，可以进行DOM操作
   const urls = await page.evaluate(() => {
     let imgs = document.querySelectorAll('img.swp__img');
@@ -47,6 +40,7 @@ async function getWelfareImage(url) {
   // 关闭无头浏览器
   await browser.close();
 }
+
 getWelfareImage(
   'https://shop43191641.m.youzan.com/wscgoods/detail/3nj59m5b2siox?banner_id=t.131837997~goods.1~2~R1pNn3gG&alg_id=0&slg=0&reft=1616140834473_1616143936190&spm=fake.0_f.90201357_t.131837997&oid=58929946'
 );
