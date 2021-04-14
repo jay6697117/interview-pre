@@ -15,6 +15,7 @@
 
   <body>
     <script>
+      // 1.0
       // const p1 = new Promise((resolve, reject) => {
       //   setTimeout(() => {
       //     return resolve(success);
@@ -35,31 +36,74 @@
       //     console.log('finally 002');
       //   });
 
-      async function getJSON() {
-        let url = 'https://api.github.com/users/ruanyf';
-        try {
-          const response = await fetch(url);
-          const json = await response.json();
-          return json;
-        } catch (error) {
-          console.log('Request Failed', error);
-        }
-      }
-      console.log('getJSON() :>> ', getJSON());
+      // 2.0
+      // async function getJSON() {
+      //   let url = 'https://api.github.com/users/ruanyf';
+      //   try {
+      //     const response = await fetch(url);
+      //     const json = await response.json();
+      //     return json;
+      //   } catch (error) {
+      //     console.log('Request Failed', error);
+      //   }
+      // }
+      // console.log('getJSON() :>> ', getJSON());
 
-      getJSON()
-        .finally(() => {
-          console.log('finally 001');
-        })
-        .then(res => {
-          console.log('then res :>> ', res);
-        })
-        .catch(err => {
-          console.log('catch err :>> ', err);
-        })
-        .finally(() => {
-          console.log('finally 002');
-        });
+      // getJSON()
+      //   .finally(() => {
+      //     console.log('finally 001');
+      //   })
+      //   .then(res => {
+      //     console.log('then res :>> ', res);
+      //   })
+      //   .catch(err => {
+      //     console.log('catch err :>> ', err);
+      //   })
+      //   .finally(() => {
+      //     console.log('finally 002');
+      //   });
+
+      // 3.0 Map基础
+      // const map = new Map();
+      // console.log('map 000:>> ', map);
+      // console.log('map.size 000:>> ', map.size);
+      // console.log('-------------------------------');
+      // map.set('k1', 111);
+      // console.log('map 001:>> ', map);
+      // console.log('map.size 001:>> ', map.size);
+      // console.log('map.get("k1") :>> ', map.get('k1'));
+      // console.log('map.has("k1") :>> ', map.has('k1'));
+      // console.log('-------------------------------');
+      // map.delete('k1');
+      // console.log('map 002:>> ', map);
+      // console.log('-------------------------------');
+      // map.set(2, 222);
+      // map.set({ a: 3 }, 333);
+      // console.log('map 003:>> ', map);
+      // console.log('map.size 002:>> ', map.size);
+      // console.log('map.has(2) :>> ', map.has(2));
+      // console.log('map.has({ a: 3 }) :>> ', map.has({ a: 3 }));
+      // console.log('-------------------------------');
+      // map[4] = 444;
+      // console.log('map 004:>> ', map);
+      // console.log('map.has(4) :>> ', map.has(4));
+      // console.log('-------------------------------');
+      // map.clear();
+      // console.log('map 005:>> ', map);
+
+      // 4.0 Map进阶
+
+      let zjh = { name: '张金辉', age: 33 };
+      // let map = new Map();
+      let obj = {};
+      obj[zjh] = 1;
+      // let map = {};
+      // map.set(zjh, 1);
+      console.log('zjh.toString() :>> ', zjh.toString());
+      console.log('typeof zjh.toString() :>> ', typeof zjh.toString());
+      console.log('obj :>> ', obj);
+      console.log('obj[zjh.toString()] :>> ', obj[zjh.toString()]);
+      // console.log('map.get(zjh) :>> ', map.get(zjh));
     </script>
   </body>
 </html>
