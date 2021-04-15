@@ -105,23 +105,48 @@
       // // console.log('map.get(zjh) :>> ', map.get(zjh));
 
       // 5.0
+      // let recipeMap1 = new Map();
+      // recipeMap1.set('cucumber', 500);
+      // console.log('recipeMap1 :>> ', recipeMap1);
       let recipeMap = new Map([
         ['cucumber', 500],
         ['tomatoes', 350],
         ['onion', 50]
       ]);
-      let recipeMap1 = new Map();
-      recipeMap1.set('cucumber', 500);
-      console.log('recipeMap1 :>> ', recipeMap1);
       console.log('recipeMap :>> ', recipeMap);
-      console.log('recipeMap.keys() :>> ', recipeMap.keys());
-      console.log('recipeMap.values() :>> ', recipeMap.values());
-      console.log('recipeMap.entries() :>> ', recipeMap.entries());
+      recipeMap.forEach((item, index, map) => {
+        console.log('--------------');
+        console.log('item :>> ', item);
+        console.log('index :>> ', index);
+        console.log('map :>> ', map);
+      });
 
-      const obj = [1, 2, 3];
-      for (const iterator of obj) {
-        console.log('iterator :>> ', iterator);
-      }
+      // console.log('recipeMap.keys() :>> ', recipeMap.keys());
+      // console.log('recipeMap.values() :>> ', recipeMap.values());
+      // console.log('recipeMap.entries() :>> ', recipeMap.entries());
+
+      // const obj = [1, 2, 3];
+      // console.log('Object.entries(obj) :>> ', Object.entries(obj));
+
+      // 6.0
+      // const obj = [1, 2, 3];
+      // for (const iterator of obj) {
+      //   console.log('iterator :>> ', iterator);
+      // }
+      // const arr = ['red', 'green', 'blue'];
+
+      // for (let v of arr) {
+      //   console.log(v); // red green blue
+      // }
+
+      // const obj = {};
+      // obj[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
+      // console.log('arr :>> ', arr);
+      // console.log('obj :>> ', obj);
+
+      // for (let v of obj) {
+      //   console.log(v); // red green blue
+      // }
     </script>
   </body>
 </html>
