@@ -108,18 +108,18 @@
       // let recipeMap1 = new Map();
       // recipeMap1.set('cucumber', 500);
       // console.log('recipeMap1 :>> ', recipeMap1);
-      let recipeMap = new Map([
-        ['cucumber', 500],
-        ['tomatoes', 350],
-        ['onion', 50]
-      ]);
-      console.log('recipeMap :>> ', recipeMap);
-      recipeMap.forEach((item, index, map) => {
-        console.log('--------------');
-        console.log('item :>> ', item);
-        console.log('index :>> ', index);
-        console.log('map :>> ', map);
-      });
+      // let recipeMap = new Map([
+      //   ['cucumber', 500],
+      //   ['tomatoes', 350],
+      //   ['onion', 50]
+      // ]);
+      // console.log('recipeMap :>> ', recipeMap);
+      // recipeMap.forEach((item, index, map) => {
+      //   console.log('--------------');
+      //   console.log('item :>> ', item);
+      //   console.log('index :>> ', index);
+      //   console.log('map :>> ', map);
+      // });
 
       // console.log('recipeMap.keys() :>> ', recipeMap.keys());
       // console.log('recipeMap.values() :>> ', recipeMap.values());
@@ -129,24 +129,39 @@
       // console.log('Object.entries(obj) :>> ', Object.entries(obj));
 
       // 6.0
-      // const obj = [1, 2, 3];
-      // for (const iterator of obj) {
-      //   console.log('iterator :>> ', iterator);
-      // }
       // const arr = ['red', 'green', 'blue'];
-
-      // for (let v of arr) {
-      //   console.log(v); // red green blue
-      // }
-
       // const obj = {};
       // obj[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
       // console.log('arr :>> ', arr);
       // console.log('obj :>> ', obj);
 
-      // for (let v of obj) {
-      //   console.log(v); // red green blue
+      // for (const v of arr) {
+      //   console.log('v1 :>> ', v);// red green blue
       // }
+      // console.log('-------------------------');
+      // for (const v of obj) {
+      //   console.log('v2 :>> ', v);// red green blue
+      // }
+
+      // 7.0
+      // const arr = Object.entries({ name: '张金辉', age: 33 });
+      // console.log('arr :>> ', arr);
+      // const map = new Map(arr);
+      // console.log('map :>> ', map);
+      // console.log(map.get('name'));
+
+      const arr = [
+        ['name', '张金辉'],
+        ['age', 33]
+      ];
+      const map = new Map(arr);
+      console.log('arr :>> ', arr);
+      console.log('map :>> ', map);
+
+      const obj = Object.fromEntries(arr);
+      const obj1 = Object.fromEntries(map);
+      console.log('obj :>> ', obj);
+      console.log('obj1 :>> ', obj1);
     </script>
   </body>
 </html>
