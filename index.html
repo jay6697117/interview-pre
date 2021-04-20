@@ -150,18 +150,109 @@
       // console.log('map :>> ', map);
       // console.log(map.get('name'));
 
-      const arr = [
-        ['name', '张金辉'],
-        ['age', 33]
-      ];
-      const map = new Map(arr);
-      console.log('arr :>> ', arr);
-      console.log('map :>> ', map);
+      // 8.0
+      // const arr = [
+      //   ['name', '张金辉'],
+      //   ['age', 33]
+      // ];
+      // const map = new Map(arr);
+      // console.log('arr :>> ', arr);
+      // console.log('map :>> ', map);
+      // console.log('-------------------------');
+      // const obj = Object.fromEntries(arr);
+      // const obj1 = Object.fromEntries(map);
+      // console.log('obj :>> ', obj);
+      // console.log('obj1 :>> ', obj1);
 
-      const obj = Object.fromEntries(arr);
-      const obj1 = Object.fromEntries(map);
-      console.log('obj :>> ', obj);
+      // 8.0
+      // const initObj = { banana: 1, orange: 2 };
+      // const map = new Map(Object.entries(initObj));
+      // console.log('1 Object.entries(initObj) :>> ', Object.entries(initObj));
+      // console.log('2 map.entries() :>> ', map.entries());
+      // console.log('3 map :>> ', map);
+      // console.log('----------------------------------');
+      // const obj1 = Object.fromEntries(Object.entries(initObj));//可迭代对象:数组
+      // const obj2 = Object.fromEntries(map.entries());//可迭代对象:可迭代的键/值对
+      // const obj3 = Object.fromEntries(map);//可迭代对象:map对象
+      // console.log('obj1 :>> ', obj1);
+      // console.log('obj2 :>> ', obj2);
+      // console.log('obj3 :>> ', obj3);
+
+      // 9.0
+      // const set = new Set();
+      // console.log('set 000:>> ', set);
+      // set.add(1);
+      // set.add(1);
+      // set.add('2');
+      // set.add('2');
+      // let addRes = set.add(false); // 添加一个值，返回 set 本身
+      // addRes = set.add(false); // 添加一个值，返回 set 本身
+      // console.log('addRes :>> ', addRes);
+      // console.log('set 001:>> ', set);
+      // const delRes = set.delete(false); // 删除值，如果 value 在这个方法调用的时候存在则返回 true ，否则返回 false;
+      // console.log('delRes :>> ', delRes);
+      // console.log('set 002:>> ', set);
+      // const hasRes = set.has(3);
+      // console.log('hasRes :>> ', hasRes);
+      // set.clear();
+      // console.log('set 003:>> ', set);
+
+      // const set = new Set();
+      // const zjh = { name: '张金辉' };
+      // const ytt = { name: '袁婷婷' };
+      // const yh = { name: '袁贺' };
+      // const cyy = { name: '蔡圆圆' };
+
+      // set.add(zjh);
+      // set.add(ytt);
+      // set.add(zjh);
+      // set.add(ytt);
+      // set.add(zjh);
+
+      // console.log('set :>> ', set);
+      // console.log('set.size :>> ', set.size);
+
+      // for (const v of set) {
+      //   console.log('v :>> ', v);
+      // }
+
+      // const set = new Set(['张金辉', '袁婷婷']);
+      // console.log('set :>> ', set);
+
+      // for (const iterator of set) {
+      //   console.log('iterator :>> ', iterator);
+      // }
+      // console.log('--------------------------');
+      // set.forEach((element, index, set) => {
+      //   console.log('element :>> ', element);
+      //   console.log('index :>> ', index);
+      //   console.log('set :>> ', set);
+      // });
+      // console.log('--------------------------');
+      // console.log('set.keys() :>> ', set.keys());
+      // console.log('set.values() :>> ', set.values());
+      // console.log('set.entries() :>> ', set.entries());
+
+      // const arr = ['Hare', 'Krishna', 'Hare', 'Krishna', 'Krishna', 'Krishna', 'Hare', 'Hare', ':-O'];
+      // const set = new Set(arr);
+      // console.log('set :>> ', set);
+      // console.log('unique(arr) :>> ', unique(arr));
+
+      // function unique(arr) {
+      //   // return [...new Set(arr)];
+      //   return Array.from(set);
+      // }
+      console.log('--------------------------');
+      const arr = ['red', 'green', 'blue'];
+      console.log('arr :>> ', arr);
+      const obj1 = {};
+      const obj2 = {};
+      console.log('arr[Symbol.iterator].bind(arr) :>> ', arr[Symbol.iterator].bind(arr));
+      console.log('arr[Symbol.iterator] :>> ', arr[Symbol.iterator]);
+      obj1[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
+      obj2[Symbol.iterator] = arr[Symbol.iterator];
       console.log('obj1 :>> ', obj1);
+      console.log('obj2 :>> ', obj2);
     </script>
   </body>
 </html>
