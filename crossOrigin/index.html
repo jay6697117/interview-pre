@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>crossOrigin跨域测试</title>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  </head>
+  <body>
+    This is my HTML page.
+    <br />
+  </body>
+  <script>
+    $(function () {
+      test();
+    });
+    function test() {
+      // GET
+      const url = '/times/member-pub-center/integrated/api/v1/login';
+      const requestHeader = {
+        'Content-Type': 'application/json;charset=utf-8'
+      };
+      $.ajax({
+        url: url,
+        cache: false,
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        headers: { ...requestHeader },
+        success: function (data) {
+          console.log('data :>> ', data);
+        }
+      });
+
+      // POST
+      const url1 = '/times/member-center/integrated/api/v1/user';
+      const requestHeader1 = {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjE4OTc3MjIyLCJhdXRob3JpdGllcyI6WyJ6Yl9xdWFsaXR5X2RpcmVjdG9yIiwiYXBwX2FjdGl2aXR5X2FkbWluIiwic3lzX2FkbWluIiwiYW55dGltZXMiXSwianRpIjoiZTc2MDY3MWYtMTAxZi00MTc3LWJhZDgtODVjNDFmNmZjYTJhIiwiY2xpZW50X2lkIjoid2ViX2IifQ.hNvMvk4Yd6YBNdnlvQnUCb59vjMJQpXLSlcXV0AMfDEdKzTL55gKwCi0c6FRVA1bjC91xsNy-BGcgUU1jZcNgEudHdL5ZpCvRAQV5hhK2RbDieXcpVM_RkjxWPV-rffUcnD9HDHu0-gBYZ6SKLN6XSgWCZH_Li3_rMnkWFRTjohFVJom6ZvDLZpUnKvenh_UtK9Y3izwztjTn4wRko0pPEXmqqV2r6BbvSRA9IACwsfNZ1yrUYs_1Zld_OXYIZrg_YhEAwpDRn_OEVbSo4Pq8XCvVR9ycFvFsa1CBI6l767Lvu4OzHVJaVvGyEUHKAJhieOUHF5gb6yBOfG7v5eDmg'
+      };
+
+      const requestBody = {
+        token:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjE4OTc3MjIyLCJhdXRob3JpdGllcyI6WyJ6Yl9xdWFsaXR5X2RpcmVjdG9yIiwiYXBwX2FjdGl2aXR5X2FkbWluIiwic3lzX2FkbWluIiwiYW55dGltZXMiXSwianRpIjoiZTc2MDY3MWYtMTAxZi00MTc3LWJhZDgtODVjNDFmNmZjYTJhIiwiY2xpZW50X2lkIjoid2ViX2IifQ.hNvMvk4Yd6YBNdnlvQnUCb59vjMJQpXLSlcXV0AMfDEdKzTL55gKwCi0c6FRVA1bjC91xsNy-BGcgUU1jZcNgEudHdL5ZpCvRAQV5hhK2RbDieXcpVM_RkjxWPV-rffUcnD9HDHu0-gBYZ6SKLN6XSgWCZH_Li3_rMnkWFRTjohFVJom6ZvDLZpUnKvenh_UtK9Y3izwztjTn4wRko0pPEXmqqV2r6BbvSRA9IACwsfNZ1yrUYs_1Zld_OXYIZrg_YhEAwpDRn_OEVbSo4Pq8XCvVR9ycFvFsa1CBI6l767Lvu4OzHVJaVvGyEUHKAJhieOUHF5gb6yBOfG7v5eDmg'
+      };
+
+      $.ajax({
+        url: url1,
+        cache: false,
+        type: 'POST',
+        dataType: 'json',
+        async: false,
+        headers: { ...requestHeader1 },
+        data: JSON.stringify(requestBody),
+        success: function (data) {
+          console.log('data :>> ', data);
+        }
+      });
+    }
+  </script>
+</html>
