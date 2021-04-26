@@ -10,7 +10,7 @@ app.use(
   '/times',
   createProxyMiddleware({
     //目标后端服务地址
-    target: 'http://8.129.64.205:12345',
+    target: 'https://member-uat-members-linli.timesgroup.cn:8080',
     changeOrigin: true,
     // pathRewrite: {
     //   '^/times': '/times'

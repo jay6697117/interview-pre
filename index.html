@@ -242,21 +242,43 @@
       //   // return [...new Set(arr)];
       //   return Array.from(set);
       // }
-      console.log('--------------------------');
-      const arr = ['red', 'green', 'blue'];
-      console.log('arr :>> ', arr);
-      const obj1 = {};
-      const obj2 = {};
-      console.log('arr[Symbol.iterator].bind(arr) :>> ', arr[Symbol.iterator].bind(arr));
-      console.log('arr[Symbol.iterator] :>> ', arr[Symbol.iterator]);
-      obj1[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
-      obj2[Symbol.iterator] = arr[Symbol.iterator];
-      console.log('obj1 :>> ', obj1);
-      console.log('obj2 :>> ', obj2);
+      // console.log('--------------------------');
+      // const arr = ['red', 'green', 'blue'];
+      // console.log('arr :>> ', arr);
+      // const obj1 = {};
+      // const obj2 = {};
+      // console.log('arr[Symbol.iterator].bind(arr) :>> ', arr[Symbol.iterator].bind(arr));
+      // console.log('arr[Symbol.iterator] :>> ', arr[Symbol.iterator]);
+      // obj1[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
+      // obj2[Symbol.iterator] = arr[Symbol.iterator];
+      // console.log('obj1 :>> ', obj1);
+      // console.log('obj2 :>> ', obj2);
 
-      for (const iterator of object) {
+      // for (const iterator in 'abc') {
+      //   console.log('iterator :>> ', iterator);
+      // }
+      // console.log('--------------------------');
+      // for (const key in 'abc') {
+      //   if (Object.hasOwnProperty.call('abc', key)) {
+      //     const element = 'abc'[key];
+      //     console.log('key :>> ', key);
+      //     console.log('element :>> ', element);
+      //   }
+      // }
 
+      for (const key in '123') {
+        if (Object.hasOwnProperty.call('123', key)) {
+          const element = '123'[key];
+          console.log('element :>> ', element);
+        }
       }
+
+      // const obj = {a:1,b:2}
+
+      // for (const iterator of obj) {
+      //   console.log('iterator :>> ', iterator);
+      // }
+
     </script>
   </body>
 </html>
