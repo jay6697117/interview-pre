@@ -59,9 +59,9 @@ const url = 'https://movie.douban.com/tv/#!type=tv&tag=%E7%83%AD%E9%97%A8&sort=r
     browser.close();
     console.log('result :>> ', result);
     // convert JSON object to string
-    const dataStr = JSON.stringify(result, '', '\t');
+    const dataStr = JSON.stringify(result, null, '  ');
     // write JSON string to a file
-    fs.writeFile(__filename.replace(/\.js$/,'.json'), dataStr, err => {
+    fs.writeFile(__filename.replace(/\.js$/, '.json'), dataStr, err => {
       if (err) {
         throw err;
       }
