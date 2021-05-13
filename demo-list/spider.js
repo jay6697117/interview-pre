@@ -30,13 +30,13 @@ async function getWelfareImage(url) {
     return url;
   });
   console.log('urls :>> ', urls);
-  for (let index = 0; index < urls.length; index++) {
-    const url = urls[index];
-    const req = https.request(url, res => {
-      res.pipe(fs.createWriteStream(path.basename(url)));
-    });
-    req.end();
-  }
+  // for (let index = 0; index < urls.length; index++) {
+  //   const url = urls[index];
+  //   const req = https.request(url, res => {
+  //     res.pipe(fs.createWriteStream(path.basename(url)));
+  //   });
+  //   req.end();
+  // }
   // 关闭无头浏览器
   await browser.close();
 }
