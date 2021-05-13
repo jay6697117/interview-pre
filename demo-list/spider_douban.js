@@ -6,7 +6,10 @@ const puppeteer = require('puppeteer');
 function sleep(delay) {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
-const url = `https://movie.douban.com/tag/#/?sort=T&range=0,10&tags=`;
+
+const url = "https://movie.douban.com/tv/#!type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=0";
+// const url = `https://movie.douban.com/tag/#/?sort=T&range=0,10&tags=`;
+
 (async () => {
   try {
     console.log('start visit the target page');
@@ -23,7 +26,7 @@ const url = `https://movie.douban.com/tag/#/?sort=T&range=0,10&tags=`;
     });
     await sleep(3000);
     await page.waitForSelector('.more'); //异步的，等待元素加载之后，否则获取不到异步加载的元素
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
       await sleep(3000);
       await page.click('.more'); //点击按钮一次
     }
@@ -37,12 +40,12 @@ const url = `https://movie.douban.com/tag/#/?sort=T&range=0,10&tags=`;
       if (items.length >= 1) {
         items.each((index, item) => {
           let it = $(item);
-          console.log(it);
+          console.log('it :>> ', it);
           let doubanID = it.find('div').data('id');
           // jQuery >= 1.4.3，可以选择div中data-id属性的值
           let title = it.find('.title').text();
           let rate = Number(it.find('.rate').text());
-          let poster = it.find('img').attr('src').replace('s_retio', 'l_retio');
+          let poster = it.find('img').attr('src');
           links.push({
             doubanID,
             title,
@@ -54,7 +57,7 @@ const url = `https://movie.douban.com/tag/#/?sort=T&range=0,10&tags=`;
       return links;
     });
     browser.close();
-    console.log(result);
+    console.log('result :>> ', result);
   } catch (err) {
     console.log(err);
   }
